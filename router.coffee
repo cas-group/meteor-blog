@@ -12,6 +12,12 @@ if Meteor.isClient
     Iron.Router.hooks.dataNotFound.call @
   , only: ['blogShow']
 
+  Router.onBeforeAction ->
+    if Blog.settings.layoutTemplate
+      @layout Blog.settings.layoutTemplate
+    @next()
+  , only: ['blogIndex', 'blogShow', 'blogTagged', 'blogAdmin', 'blogAdminEdit']
+
 # RSS
 
 Router.route '/rss/posts',
