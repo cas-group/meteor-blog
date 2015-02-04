@@ -32,10 +32,8 @@ Router.route '/blog',
     @next()
   waitOn: ->
     if (typeof Session isnt 'undefined')
-      [
-        subs.subscribe 'posts', Session.get('postLimit')
-        subs.subscribe 'authors'
-      ]
+      Meteor.subscribe 'posts', Session.get('postLimit')
+      subs.subscribe 'authors'
   fastRender: true
   data: ->
     posts: Post.where {},
@@ -47,7 +45,7 @@ Router.route '/blog/tag/:tag',
   name: 'blogTagged'
   template: 'custom'
   waitOn: -> [
-    subs.subscribe 'taggedPosts', @params.tag
+    Meteor.subscribe 'taggedPosts', @params.tag
     subs.subscribe 'authors'
   ]
   fastRender: true
