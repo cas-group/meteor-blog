@@ -58,9 +58,6 @@ Meteor.publish 'singlePostById', (id) ->
   Post.find _id: id
 
 Meteor.publish 'postTags', ->
-  if not @userId
-    return @ready()
-
   initializing = true
   tags = Tag.first().tags
 
