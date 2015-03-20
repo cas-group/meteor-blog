@@ -68,4 +68,4 @@ Meteor.startup ->
   # Ensure tags collection is non-empty
   if Tag.count() == 0
     Tag.create
-      tags: ['meteor']
+      tags: ['news']
