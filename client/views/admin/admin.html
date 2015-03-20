@@ -7,7 +7,7 @@
         </div>
         <div class="col-md-9">
           <a href="#" class="for-new-blog btn btn-default">
-            <i class="fa fa-plus"></i> Add Blog Post
+            <i class="fa fa-plus"></i> Add New Post
           </a>
           <select class="for-filtering form-control">
             <option value="all">All Posts</option>
@@ -20,7 +20,7 @@
           {{#if posts}}
             {{> reactiveTable collection=posts settings=table}}
           {{else}}
-            <a href="#" class="for-new-blog">Create the first blog</a>
+            <a href="#" class="for-new-blog">Create the first post</a>
           {{/if}}
         </div>
       </div>
