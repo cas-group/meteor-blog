@@ -16,7 +16,13 @@ if Meteor.isClient
     if Blog.settings.layoutTemplate
       @layout Blog.settings.layoutTemplate
     @next()
-  , only: ['blogIndex', 'blogShow', 'blogTagged', 'blogAdmin', 'blogAdminEdit']
+  , only: ['blogIndex', 'blogShow', 'blogTagged']
+
+  Router.onBeforeAction ->
+    if Blog.settings.adminLayoutTemplate
+      @layout Blog.settings.adminLayoutTemplate
+    @next()
+  , only: ['blogAdmin', 'blogAdminEdit']
 
 # RSS
 
