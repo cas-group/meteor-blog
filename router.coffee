@@ -42,7 +42,7 @@ Router.route '/blog',
     if not Session.get('postLimit') and Blog.settings.pageSize
       Session.set 'postLimit', Blog.settings.pageSize
     @next()
-  waitOn: ->
+  subscriptions: ->
     if (typeof Session isnt 'undefined')
       Meteor.subscribe 'posts', Session.get('postLimit')
       subs.subscribe 'authors'
@@ -56,7 +56,7 @@ Router.route '/blog',
 Router.route '/blog/tag/:tag',
   name: 'blogTagged'
   template: 'custom'
-  waitOn: -> [
+  subscriptions: -> [
     Meteor.subscribe 'taggedPosts', @params.tag
     subs.subscribe 'authors'
   ]
@@ -94,7 +94,7 @@ Router.route '/blog/:slug',
     @next()
   action: ->
     @render() if @ready()
-  waitOn: -> [
+  subscriptions: -> [
     Meteor.subscribe 'singlePostBySlug', @params.slug
     subs.subscribe 'commentsBySlug', @params.slug
     subs.subscribe 'authors'
@@ -119,7 +119,7 @@ Router.route '/admin/blog',
         return @redirect('/blog')
 
     @next()
-  waitOn: ->
+  subscriptions: ->
     [ Meteor.subscribe 'postForAdmin'
       Meteor.subscribe 'authors' ]
 
@@ -143,7 +143,7 @@ Router.route '/admin/blog/edit/:id',
     @next() if Session.get("postId").length?
   action: ->
     @render() if @ready()
-  waitOn: -> [
+  subscriptions: -> [
     Meteor.subscribe 'singlePostById', @params.id
     Meteor.subscribe 'authors'
     Meteor.subscribe 'postTags'
