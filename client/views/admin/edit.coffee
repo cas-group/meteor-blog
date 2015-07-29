@@ -50,8 +50,6 @@ save = (tpl, cb) ->
 
   slug = $('[name=slug]', $form).val()
   description = $('[name=description]', $form).val()
-  publishedAt = $('[name=published_at]', $form).val()
-  timeNow = moment().format "HH:mm"
 
   attrs =
     title: $('[name=title]', $form).val()
@@ -60,7 +58,6 @@ save = (tpl, cb) ->
     description: description
     body: body
     updatedAt: new Date()
-    publishedAt: moment(publishedAt + " " + timeNow).toDate()
 
   if getPost( Session.get('postId') ).id
     post = getPost( Session.get('postId') ).update attrs
